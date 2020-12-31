@@ -73,6 +73,8 @@ public class HomeController {
 
         if (rowsAdded < 1) {
             model.addAttribute("fileErrorMessage", "Could not successfully add file. Please try again.");
+        } else {
+            model.addAttribute("fileSuccessMessage", "Successfully uploaded file.");
         }
 
         addFilesToModel(model, currentUsername);
@@ -86,6 +88,8 @@ public class HomeController {
 
         if (rowsDeleted < 0) {
             model.addAttribute("fileErrorMessage", "Could not successfully delete file. Please try again.");
+        } else {
+            model.addAttribute("fileSuccessMessage", "File successfully deleted.");
         }
 
         addFilesToModel(model, currentUsername);
@@ -104,6 +108,8 @@ public class HomeController {
 
             if (rowsAdded < 1) {
                 model.addAttribute("noteErrorMessage", "Could not successfully add note. Please try again.");
+            } else {
+                model.addAttribute("noteSuccessMessage", "Note successfully added.");
             }
         } else {
             // otherwise, modify the existing note in database
@@ -111,6 +117,8 @@ public class HomeController {
 
             if (rowsChanged < 1) {
                 model.addAttribute("noteErrorMessage", "Could not successfully update note. Please try again.");
+            } else {
+                model.addAttribute("noteSuccessMessage", "Note successfully updated.");
             }
         }
 
@@ -125,6 +133,8 @@ public class HomeController {
 
         if (rowsDeleted < 1) {
             model.addAttribute("noteErrorMessage", "Could not successfully delete note. Please try again.");
+        } else {
+            model.addAttribute("noteSuccessMessage", "Note successfully deleted.");
         }
 
         addFilesToModel(model, currentUsername);
@@ -148,12 +158,16 @@ public class HomeController {
 
             if (rowsAdded < 1) {
                 model.addAttribute("credentialErrorMessage", "Could not successfully add credential. Please try again.");
+            } else {
+                model.addAttribute("credentialSuccessMessage", "Credential successfully added.");
             }
         } else {
             int rowsChanged = credentialService.editCredential(credentialData, currentUsername);
 
             if (rowsChanged < 1) {
                 model.addAttribute("credentialErrorMessage", "Could not successfully update credential. Please try again.");
+            } else {
+                model.addAttribute("credentialSuccessMessage", "Credential successfully updated.");
             }
         }
 
@@ -168,6 +182,8 @@ public class HomeController {
 
         if (rowsDeleted < 1) {
             model.addAttribute("credentialErrorMessage", "Could not successfully delete credential. Please try again.");
+        } else {
+            model.addAttribute("credentialSuccessMessage", "Credential successfully deleted.");
         }
 
         addFilesToModel(model, currentUsername);

@@ -17,6 +17,26 @@
                 </form>
             </div>
             <div id="contentDiv" style="clear: right;">
+                <div id="messagingDiv" style="padding-top: 12px">
+                    <div id="file-error-message" th:if="${fileErrorMessage}" class="alert alert-danger">
+                        <span th:text="${fileErrorMessage}"></span>
+                    </div>
+                    <div id="note-error-message" th:if="${noteErrorMessage}" class="alert alert-danger">
+                        <span th:text="${noteErrorMessage}"></span>
+                    </div>
+                    <div id="credential-error-message" th:if="${credentialErrorMessage}" class="alert alert-danger">
+                        <span th:text="${credentialErrorMessage}"></span>
+                    </div>
+                    <div id="file-success-message" th:if="${fileSuccessMessage}" class="alert alert-dark">
+                        <span th:text="${fileSuccessMessage}"></span>
+                    </div>
+                    <div id="note-success-message" th:if="${noteSuccessMessage}" class="alert alert-dark">
+                        <span th:text="${noteSuccessMessage}"></span>
+                    </div>
+                    <div id="credential-success-message" th:if="${credentialSuccessMessage}" class="alert alert-dark">
+                        <span th:text="${credentialSuccessMessage}"></span>
+                    </div>
+                </div>
                 <nav style="clear: right;">
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-files-tab" data-toggle="tab" href="#nav-files" role="tab" aria-controls="nav-files" aria-selected="true">Files</a>
@@ -42,9 +62,6 @@
                             </div>
                         </form>
                         <div class="table-responsive">
-                            <div id="file-error-message" th:if="${fileErrorMessage}" class="alert alert-danger">
-                                <span th:text="${fileErrorMessage}"></span>
-                            </div>
                             <table class="table table-striped" id="fileTable">
                                 <thead>
                                     <tr>
@@ -72,9 +89,6 @@
                         </button>
 
                         <div class="table-responsive">
-                            <div id="note-error-message" th:if="${noteErrorMessage}" class="alert alert-danger">
-                                <span th:text="${noteErrorMessage}"></span>
-                            </div>
                             <table class="table table-striped" id="userTable">
                                 <thead>
                                     <tr>
@@ -135,9 +149,6 @@
                         </button>
 
                         <div class="table-responsive">
-                            <div id="credential-error-message" th:if="${credentialErrorMessage}" class="alert alert-danger">
-                                <span th:text="${credentialErrorMessage}"></span>
-                            </div>
                             <table class="table table-striped" id="credentialTable">
                                 <thead>
                                     <tr>
