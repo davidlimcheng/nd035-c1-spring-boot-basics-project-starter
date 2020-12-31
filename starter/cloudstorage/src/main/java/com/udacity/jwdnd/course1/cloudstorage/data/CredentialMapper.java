@@ -2,8 +2,10 @@ package com.udacity.jwdnd.course1.cloudstorage.data;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.Credential;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 @Mapper
+@Repository
 public interface CredentialMapper {
     @Select("SELECT * FROM CREDENTIALS WHERE userId = #{userId}")
     Credential[] getCredentials(int userId);

@@ -2,8 +2,10 @@ package com.udacity.jwdnd.course1.cloudstorage.data;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 @Mapper
+@Repository
 public interface NoteMapper {
 
     @Select("SELECT * FROM NOTES WHERE userid = #{userId}")
