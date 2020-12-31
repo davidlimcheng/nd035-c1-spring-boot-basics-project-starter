@@ -63,6 +63,12 @@ public class HomeController {
             return "/home";
         }
 
+        if (fileService.fileSizeExceedsMaximum(fileUpload)) {
+            model.addAttribute("fileErrorMessage", "File size exceeds maximum. Please choose a smaller file.");
+            addFilesToModel(model, currentUsername);
+            return "/home";
+        }
+
         int rowsAdded = fileService.addFile(currentUsername, fileUpload);
 
         if (rowsAdded < 1) {
