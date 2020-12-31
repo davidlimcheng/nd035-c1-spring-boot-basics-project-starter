@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/signup")
@@ -27,18 +28,21 @@ public class SignUpController {
     }
 
     @PostMapping()
-    public String signup(@ModelAttribute User user, Model model) {
-        String signupError = null;
-
+    public ModelAndView signup(@ModelAttribute User user, Model model) {
         int rowsAdded = userService.createUser(user);
 
         if (rowsAdded < 0 ) {
-            signupError = "There was an error signing you up. Please try again.";
-            model.addAttribute("signupError", signupError);
-        } else {
-            model.addAttribute("signupSuccess", true);
-        }
+            ModelAndView signupModelAndView = new ModelAndView("/signup");
+            String signupError = "There was an error signing you up. Please try again.";
 
-        return "/signup";
+            signupModelAndView.addObject("signupError", signupError);
+            return signupModelAndView;
+        } else {
+            ModelAndView loginModelAndView = new ModelAndView("/login");
+            String signupSuccess = "You have successfully signed up. Please login to continue";
+
+            loginModelAndView.addObject("signupSuccess", signupSuccess);
+            return loginModelAndView;
+        }
     }
 }
