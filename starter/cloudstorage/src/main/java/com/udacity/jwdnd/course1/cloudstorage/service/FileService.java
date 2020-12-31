@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import java.io.IOException;
+import java.util.Objects;
 
 @Service
 public class FileService {
@@ -64,4 +65,6 @@ public class FileService {
     public boolean fileSizeExceedsMaximum(MultipartFile file) {
         return file.getSize() > MAXIMUM_FILE_SIZE;
     }
+
+    public boolean isFileEmpty(MultipartFile file) { return Objects.requireNonNull(file.getOriginalFilename()).isEmpty(); }
 }

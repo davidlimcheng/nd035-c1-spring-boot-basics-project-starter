@@ -57,6 +57,12 @@ public class HomeController {
     public String handleFileUpload(Authentication auth, @RequestParam("fileUpload") MultipartFile fileUpload, Model model) {
         String currentUsername = auth.getName();
 
+        if(fileService.isFileEmpty(fileUpload)) {
+            model.addAttribute("fileErrorMessage", "No file selected.");
+            addFilesToModel(model, currentUsername);
+            return "/home";
+        }
+
         if (!fileService.isFileNameAvailable(fileUpload.getOriginalFilename())) {
             model.addAttribute("fileErrorMessage", "You already have a file of that name. Please rename file before uploading.");
             addFilesToModel(model, currentUsername);
