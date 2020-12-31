@@ -47,7 +47,7 @@ public class SignUpController {
             return signupModelAndView;
         } else {
             ModelAndView loginModelAndView = new ModelAndView("/login");
-            String signupSuccess = "You have successfully signed up. Please login to continue";
+            String signupSuccess = "You have successfully signed up. Please login to continue.";
 
             loginModelAndView.addObject("signupSuccess", signupSuccess);
             return loginModelAndView;

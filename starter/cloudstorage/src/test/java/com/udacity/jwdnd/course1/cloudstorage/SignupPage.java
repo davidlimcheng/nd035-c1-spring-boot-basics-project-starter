@@ -35,13 +35,6 @@ public class SignupPage {
         PageFactory.initElements(driver, this);
     }
 
-    public String getSuccessMessage() {
-        WebDriverWait wait = new WebDriverWait(driver, Constants.WAIT_TIMEOUT);
-        WebElement marker = wait.until(webDriver -> webDriver.findElement(By.id("success-msg")));
-
-        return marker.getText();
-    }
-
     public void goToLogin() {
         loginLink.click();
     }

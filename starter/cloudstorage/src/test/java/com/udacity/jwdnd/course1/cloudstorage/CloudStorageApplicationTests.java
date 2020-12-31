@@ -24,7 +24,6 @@ class CloudStorageApplicationTests {
 	private SignupPage signupPage;
 	private final String firstName = "Tom";
 	private final String lastName = "Ato";
-	private final String username = "HappyGardener82";
 	private final String password = "i secretly eat glue";
 
 	@BeforeAll
@@ -64,23 +63,23 @@ class CloudStorageApplicationTests {
 	// logs out, and verifies the home page is inaccessible
 	@Test
 	public void newUserAccess() throws InterruptedException {
+		String username = "user1";
+
 		driver.get("http://localhost:" + this.port + "/signup");
 
 		signupPage = new SignupPage(driver);
 		signupPage.fillAndSubmitForm(firstName, lastName, username, password);
 		Thread.sleep(500);
 
-		String successMessage = signupPage.getSuccessMessage();
-		assertTrue(successMessage.contains("You successfully signed up!"));
-
-		driver.get("http://localhost:" + this.port + "/login");
 		loginPage = new LoginPage(driver);
+
+		String successMessage = loginPage.getSuccessMessage();
+		assertTrue(successMessage.contains("You have successfully signed up. Please login to continue."));
 
 		loginPage.fillAndSubmitForm(username, password);
 		Thread.sleep(500);
 
 		homePage = new HomePage(driver);
-		Thread.sleep(500);
 
 		assertEquals("Home", driver.getTitle());
 		homePage.logoutButton.click();
@@ -92,12 +91,11 @@ class CloudStorageApplicationTests {
 	// note actions
 	@Test
 	public void noteActions() throws InterruptedException {
+		String username = "user2";
+
 		driver.get("http://localhost:" + this.port + "/signup");
 		signupPage = new SignupPage(driver);
 		signupPage.fillAndSubmitForm(firstName, lastName, username, password);
-		Thread.sleep(500);
-
-		signupPage.goToLogin();
 		Thread.sleep(500);
 
 		loginPage = new LoginPage(driver);
@@ -141,12 +139,11 @@ class CloudStorageApplicationTests {
 	// credential actions
 	@Test
 	public void credentialActions() throws InterruptedException {
+		String username = "user3";
+
 		driver.get("http://localhost:" + this.port + "/signup");
 		signupPage = new SignupPage(driver);
 		signupPage.fillAndSubmitForm(firstName, lastName, username, password);
-		Thread.sleep(500);
-
-		signupPage.goToLogin();
 		Thread.sleep(500);
 
 		loginPage = new LoginPage(driver);
@@ -154,7 +151,6 @@ class CloudStorageApplicationTests {
 		Thread.sleep(500);
 
 		homePage = new HomePage(driver);
-		Thread.sleep(500);
 
 		final String credentialUrl = "http://www.backslashinforth_the_third.com";
 		final String credentialUsername = "HappyGardener";
