@@ -29,10 +29,18 @@ public class SignUpController {
 
     @PostMapping()
     public ModelAndView signup(@ModelAttribute User user, Model model) {
+        ModelAndView signupModelAndView = new ModelAndView("/signup");
+
+        if (!userService.isUsernameAvailable(user.getUsername())) {
+            String signupError = "Username already exists. Please choose a different one.";
+            signupModelAndView.addObject("signupError", signupError);
+
+            return signupModelAndView;
+        }
+
         int rowsAdded = userService.createUser(user);
 
-        if (rowsAdded < 0 ) {
-            ModelAndView signupModelAndView = new ModelAndView("/signup");
+        if (rowsAdded < 1 ) {
             String signupError = "There was an error signing you up. Please try again.";
 
             signupModelAndView.addObject("signupError", signupError);
